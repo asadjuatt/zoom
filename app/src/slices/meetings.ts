@@ -41,12 +41,12 @@ export const deleteMeetingThunk = createAsyncThunk(
 // fetch meetings
 export const createmeetingThunk = createAsyncThunk(
   'meeting/createMeeting',
-  async ({navigate, meetingData}:{navigate :(props:string) => void; meetingData:any}, { dispatch, rejectWithValue, fulfillWithValue }) => {
+  async ({navigate, meetingData}:{navigate :(props:string, option:any) => void; meetingData:any}, { dispatch, rejectWithValue, fulfillWithValue }) => {
     try {
       console.log("meetingData :", meetingData)
       return await ApiRequests.createMeetings(meetingData).then(({ data }) => {
         if (data.meetings) console.log("meetings", data)
-        navigate("/")
+        navigate("/", { replace: true })
         return fulfillWithValue(data);
       })
         .catch(error => detectError(error, dispatch, rejectWithValue))
@@ -69,7 +69,6 @@ const meeting = createSlice({
       .addCase(getMeetingThunk.pending, (state, action) => {
         state.loading = true;
       }).addCase(getMeetingThunk.fulfilled, (state, action: any) => {
-        console.log("action.payload:", action.payload)
         state.meetings = action.payload?.meetings;
         state.next_page_token = action.payload?.next_page_token;
         state.total_records = action.payload?.total_records;
@@ -83,7 +82,6 @@ const meeting = createSlice({
         state.loading = true;
       })
       .addCase(createmeetingThunk.fulfilled, (state, action: any) => {
-        console.log("action.payload:", action.payload)
         state.loading = false;
       })
       .addCase(createmeetingThunk.rejected, (state, action) => {

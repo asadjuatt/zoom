@@ -3,7 +3,6 @@ import { ApiRequests } from '../Services/ApiRequests'
 import { appSecretKey } from '../utils/constants'
 import { detectError } from '../utils/handleErrors/handleError'
 import { appReducerInterface, loginInterface, registerInterface } from '../utils/interfaces/interfaces'
-import { setError } from './ErrorSlice'
 
 const initialState: appReducerInterface = { isLogin: false, user: null, loading: false, token: null }
 
@@ -18,6 +17,7 @@ export const loginThunk = createAsyncThunk(
       })
         .catch(error => detectError(error, dispatch, rejectWithValue))
     } catch (error) {
+      console.log("wow")
       return rejectWithValue(error)
     }
   }
@@ -63,15 +63,14 @@ const counterSlice = createSlice({
     builder
       .addCase(loginThunk.pending, (state, action) => {
         state.loading = true;
-        state.token = null;
-        state.user = null;
       }).addCase(loginThunk.fulfilled, (state, action: any) => {
+        console.log("payload data", action.payload)
         state.token = action.payload?.token;
         state.isLogin = true;
         state.loading = false;
         state.user = {
-          name: "asad",
-          email: "asadiqbal791@gmail.com"
+          name: action.payload?.user?.full_Name,
+          email: action.payload?.user?.email
         }
       }).addCase(loginThunk.rejected, (state, action) => {
         state.loading = false;

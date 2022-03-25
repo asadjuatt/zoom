@@ -113,7 +113,6 @@ export default function CreateMeeting() {
           handleSubmitForm={(value:any) => {
             setFormData({ ...formData, ...value });
             dispatch(createmeetingThunk({ navigate,meetingData: { ...data,  ...value,start_time:`${moment(value.start_time).format('yyyy-MM-DD')}T${moment(value.start_time).format('HH:mm:ss')}Z`, recurrence:{type:"2", weekly_days: value?.weekly_days.toString(),end_date_time: `${moment(value.end_date_time).format('yyyy-MM-DD')}T${moment(value.end_date_time).format('HH:mm:ss')}Z` }, weekly_days:undefined, end_date_time:undefined} }));
-
           }}
           schema={CreateMeetingSchema}
           initialValue={formData}

@@ -29,13 +29,14 @@ export default function Login() {
   ]
   const [formData, setFormData] = useState<loginInterface>({ email: "eve.holt@reqres.in", password: "cityslicka" })
   const dispatch = useDispatch();
-  const { user: { isLogin }, ErrorSlice } = useSelector((state: RootStateReducer) => state)
+  const { user: { isLogin, user }, ErrorSlice } = useSelector((state: RootStateReducer) => state)
   useEffect(() => {
     if (isLogin) navigate('/')
   }, [isLogin])
 
   return (<div style={{ backgroundColor: "orange", height: "100vh", display: "flex", flexDirection:"column", justifyContent: "center", alignItems: "center" }}>
     <h1>Login</h1>
+    {JSON.stringify(user)}
     <HandleForms
       fields={fields}
       handleSubmitForm={(value) => {

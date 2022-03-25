@@ -6,7 +6,7 @@ import { deleteMeetingThunk, getMeetingThunk } from '../slices/meetings';
 import { RootStateReducer } from '../store';
 import moment from 'moment';
 function App() {
-  const { meetings } = useSelector((state: RootStateReducer) => state);
+  const { meetings, user } = useSelector((state: RootStateReducer) => state);
   const dispatch = useDispatch()
   useEffect(() => {
     dispatch(getMeetingThunk());
@@ -14,6 +14,7 @@ function App() {
   return (
     <MainLayout>
       <Container>
+        {JSON.stringify(user)}
         <h1>Total Meetings: <mark>{meetings.total_records}</mark></h1>
         {
           meetings.meetings.map(({ start_time, topic, join_url, duration,created_at, type, id }, index) => {
