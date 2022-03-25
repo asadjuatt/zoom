@@ -22,10 +22,10 @@ const ErrorSlice = (state = initialState, action: any) => {
     switch (action.type) {
         // Do something here based on the different types of actions
         case "error_occure":
-            console.log("caled vry happy")
+            // console.log("caled vry happy")
             return { ...state, ...action.payload };
         case "clearError":
-            console.log("called clear error")
+            // console.log("called clear error")
             return { ...initialState };
         default:
             // If this reducer doesn't recognize the action type, or doesn't

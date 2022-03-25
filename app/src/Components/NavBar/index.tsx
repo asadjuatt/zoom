@@ -1,7 +1,10 @@
 import { Container, Nav, Navbar } from 'react-bootstrap'
+import { useDispatch } from 'react-redux'
 import { Link } from 'react-router-dom'
+// import { logoutThunk } from '../../slices/AppSlice'
 
-export default function index() {
+export default function NavBar() {
+  // const dispatch = useDispatch()
   return (
     <Navbar bg="light" expand="lg">
       <Container>
@@ -18,7 +21,7 @@ export default function index() {
                 New Meeting
               </Link>
             </Nav.Link>
-            <Nav.Link href="link">Logout</Nav.Link>
+            {/* <Nav.Link onClick={()=>dispatch(logoutThunk())}>Logout</Nav.Link> */}
           </Nav>
         </Navbar.Collapse>
       </Container>

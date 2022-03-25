@@ -14,7 +14,6 @@ function App() {
   return (
     <MainLayout>
       <Container>
-        {JSON.stringify(user)}
         <h1>Total Meetings: <mark>{meetings.total_records}</mark></h1>
         {
           meetings.meetings.map(({ start_time, topic, join_url, duration,created_at, type, id }, index) => {

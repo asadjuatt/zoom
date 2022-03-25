@@ -55,7 +55,7 @@ const login = async (req, res, next) => {
 const register = async (req, res, next) => {
     var errors = validationResult(req).array();
     if (errors.length > 0) {
-        console.log(errors)
+        // console.log(errors)
         return res.status(422).send(errors)
     }
     const { full_Name, email, password, } = req.body;
@@ -73,7 +73,7 @@ const register = async (req, res, next) => {
             if (error.code == 11000) {
                 res.status(422).send({message: "email already exist"})
             } else {
-                console.log(error)
+                // console.log(error)
                 res.status(400).send(error)
 
             }
@@ -84,15 +84,15 @@ const register = async (req, res, next) => {
     }
 }
 const logout = (req, res, next) => {
-    console.log("req token", req)
+    // console.log("req token", req)
     User.findByIdAndUpdate(
         req.user._id,
         { $pull: { tokens: { token: req.token } } },
     ).then(data => {
-        console.log("data", data)
+        // console.log("data", data)
         res.send("loged out")
     }).catch(err => {
-        console.log("err", err)
+        // console.log("err", err)
         res.send(err)
     })
 }
@@ -101,7 +101,7 @@ const authenticate = (req, res, next) => {
         .then(data => {
             res.send({ user: data })
         }).catch(err => {
-            console.log("err", err)
+            // console.log("err", err)
             res.send(err)
         })
 }
@@ -147,12 +147,12 @@ const reset = async (req, res, next) => {
 }
 const profile = async (req, res, next) => {
     const { full_Name, email, phone_Number, zip, city, state, street, country } = req.body;
-    console.log(
-        "this.is.from.client>>>>>>",
-        full_Name, email, phone_Number, zip, city, state, street, country
-    )
+    // console.log(
+    //     "this.is.from.client>>>>>>",
+    //     full_Name, email, phone_Number, zip, city, state, street, country
+    // )
     // console.log("req.body>>>>>>>>", req.body)
-    console.log("req.body>>>>>>>>", req.file)
+    // console.log("req.body>>>>>>>>", req.file)
 
     User.findByIdAndUpdate(req.user._id, {
         full_Name,
@@ -167,11 +167,11 @@ const profile = async (req, res, next) => {
     },
         function (err, docs) {
             if (err) {
-                console.log(err)
+                // console.log(err)
                 res.state(500).send({ error: err, })
             }
             else {
-                console.log("Updated User : ", docs);
+                // console.log("Updated User : ", docs);
                 res.status(200).send({ data: docs })
             }
         });

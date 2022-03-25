@@ -9,16 +9,16 @@ const sendEmail = async (email, subject, text) => {
             pass: '12345678Maij791@'
         }
     });
-    console.log('created');
+    // console.log('created');
     transporter.sendMail({
         from: 'MainRx',
         to: email,
         subject: subject,
         text: text
     }).then(sent=>{
-        console.log("sent",sent)
+        // console.log("sent",sent)
     }).catch(error=>{
-        console.log("error",error)
+        // console.log("error",error)
     })
 };
 

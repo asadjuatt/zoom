@@ -36,7 +36,6 @@ export default function Login() {
 
   return (<div style={{ backgroundColor: "orange", height: "100vh", display: "flex", flexDirection:"column", justifyContent: "center", alignItems: "center" }}>
     <h1>Login</h1>
-    {JSON.stringify(user)}
     <HandleForms
       fields={fields}
       handleSubmitForm={(value) => {

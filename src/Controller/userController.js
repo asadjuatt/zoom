@@ -14,7 +14,7 @@ const payload = {
 const token = jwt.sign(payload, config.APISecret);
 
 const createMeeting = async (req, res) => {
-  console.log("req.body", req.body)
+  // console.log("req.body", req.body)
   var options = {
     method: "POST",
     uri: "https://api.zoom.us/v2/users/" + 'asadiqbal791@gmail.com' + "/meetings",
@@ -31,7 +31,7 @@ const createMeeting = async (req, res) => {
 
   rp(options)
     .then(function (response) {
-      console.log("response is: ", response);
+      // console.log("response is: ", response);
       // response.status(200).json(response);
       // let dataRes = {
       //   join_url: response.join_url,
@@ -43,7 +43,7 @@ const createMeeting = async (req, res) => {
     })
     .catch(function (err) {
       // API call failed...
-      console.log("API call failed, reason ", err);
+      // console.log("API call failed, reason ", err);
       res.status(422).send(err)
     });
 }
@@ -67,7 +67,7 @@ const getMeeting = async (req, res) => {
 
   rp(options)
     .then(function (response) {
-      console.log("Zoom REsponse", response);
+      // console.log("Zoom REsponse", response);
       // response.status(200).json(response);
       let dataRes = {
         join_url: response.join_url,
@@ -78,7 +78,7 @@ const getMeeting = async (req, res) => {
     })
     .catch(function (err) {
       // API call failed...
-      console.log("API call failed, reason ", err);
+      // console.log("API call failed, reason ", err);
     });
 };
 const deleteMeeting = async (req, res) => {
@@ -98,7 +98,7 @@ const deleteMeeting = async (req, res) => {
 
   rp(options)
     .then(function (response) {
-      console.log("Zoom REsponse", response);
+      // console.log("Zoom REsponse", response);
       // response.status(200).json(response);
       res.status(200).send(response)
 
@@ -106,7 +106,7 @@ const deleteMeeting = async (req, res) => {
     })
     .catch(function (err) {
       // API call failed...
-      console.log("API call failed, reason ", err);
+      // console.log("API call failed, reason ", err);
       res.status(122).send(err)
     });
 };

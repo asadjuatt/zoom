@@ -13,8 +13,8 @@ export const getMeetingThunk = createAsyncThunk(
   async (_, { dispatch, rejectWithValue, fulfillWithValue }) => {
     try {
       return await ApiRequests.getMeetings().then(({ data }) => {
-        console.log("data in getMeetings", data);
-        if (data.meetings) console.log("meetings", data.meetings)
+        // console.log("data in getMeetings", data);
+        // if (data.meetings) console.log("meetings", data.meetings)
         return fulfillWithValue(data);
       })
         .catch(error => detectError(error, dispatch, rejectWithValue))
@@ -43,9 +43,9 @@ export const createmeetingThunk = createAsyncThunk(
   'meeting/createMeeting',
   async ({navigate, meetingData}:{navigate :(props:string, option:any) => void; meetingData:any}, { dispatch, rejectWithValue, fulfillWithValue }) => {
     try {
-      console.log("meetingData :", meetingData)
+      // console.log("meetingData :", meetingData)
       return await ApiRequests.createMeetings(meetingData).then(({ data }) => {
-        if (data.meetings) console.log("meetings", data)
+        // if (data.meetings) console.log("meetings", data)
         navigate("/", { replace: true })
         return fulfillWithValue(data);
       })
@@ -76,7 +76,7 @@ const meeting = createSlice({
         state.loading = false;
       }).addCase(getMeetingThunk.rejected, (state, action) => {
         state.loading = false;
-        console.log("rejected with ", action.payload)
+        // console.log("rejected with ", action.payload)
       })
       .addCase(createmeetingThunk.pending, (state, action) => {
         state.loading = true;
@@ -86,7 +86,7 @@ const meeting = createSlice({
       })
       .addCase(createmeetingThunk.rejected, (state, action) => {
         state.loading = false;
-        console.log("rejected with ", action.payload)
+        // console.log("rejected with ", action.payload)
       })
   },
 })

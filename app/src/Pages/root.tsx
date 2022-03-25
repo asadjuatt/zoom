@@ -16,11 +16,11 @@ export default function Root() {
     useEffect(() => {
         dispatch(authenticateThunk())
     }, [])
-    
+
     return (
         <BrowserRouter>
             <Routes>
-            
+
                 {/* <Route path="/" element={<PrivateRoute outlet={<App />} />} /> */}
                 <Route path="/" element={<App />} />
                 <Route path="/CreateMeeting" element={<CreateMeeting />} />

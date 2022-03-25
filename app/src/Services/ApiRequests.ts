@@ -4,6 +4,7 @@ import { APIurls } from "../utils/constants";
 export const ApiRequests = {
     login : async (data: loginInterface) => await apiService.post(APIurls.login,data),
     authenticate : async () => await apiService.get(APIurls.authenticate),
+    logout : async () => await apiService.get(APIurls.logout),
     register : async (data: registerInterface) => await apiService.post(APIurls.register,data),
     getMeetings : async () => await apiService.get(APIurls.meeting),
     deleteMeetings : async ({ id }: { id: string; }) => await apiService.delete(APIurls.meeting +"/" + id),
