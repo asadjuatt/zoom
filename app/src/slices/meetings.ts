@@ -23,6 +23,7 @@ export const getMeetingThunk = createAsyncThunk(
     }
   }
 )
+// delete meeting
 export const deleteMeetingThunk = createAsyncThunk(
   'meeting/deleteMeeting',
   async ({ id }: { id: string; }, { dispatch, rejectWithValue, fulfillWithValue }) => {

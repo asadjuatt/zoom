@@ -21,7 +21,7 @@ export default function CreateMeeting() {
     password: "123abc",
     recurrence: {
       type: "2",
-      weekly_days: "2, 3, 4, 5",
+      weekly_days: "1, 2, 3, 4",
       end_date_time: "2022-04-29T14:30:00Z",
       repeat_interval:"4"
     },
@@ -61,7 +61,7 @@ export default function CreateMeeting() {
       placeholder: "Enter Your topic"
     },
     {
-      label: "Start Time",
+      label: "Start Time (For all Meeting and firt date, when start)",
       field: "start_time",
       type: "datetime-local",
       comonent: "input",
@@ -76,7 +76,6 @@ export default function CreateMeeting() {
       width: 1,
       placeholder: "Enter Your End Date Time"
     },
-    
     {
       label: "password",
       field: "password",
@@ -113,8 +112,7 @@ export default function CreateMeeting() {
           fields={fields}
           handleSubmitForm={(value:any) => {
             setFormData({ ...formData, ...value });
-            // dispatch(createmeetingThunk({ navigate,meetingData: { ...data, start_time:moment(value.start_time).format('yyyy-MM-ddTHH:mm:ssZ'), ...value, recurrence:{type:"2", weekly_days: value?.weekly_days.toString(),end_date_time: moment(value?.end_date_time).format('yyyy-MM-ddTHH:mm:ssZ'), }, weekly_days:undefined, end_date_time:undefined} }));
-            dispatch(createmeetingThunk({ navigate,meetingData: { ...data, start_time:"2022-04-1T14:00:00Z", ...value, recurrence:{type:"2", weekly_days: value?.weekly_days.toString(),end_date_time: "2022-04-30T14:30:00Z", }, weekly_days:undefined, end_date_time:undefined} }));
+            dispatch(createmeetingThunk({ navigate,meetingData: { ...data,  ...value,start_time:`${moment(value.start_time).format('yyyy-MM-DD')}T${moment(value.start_time).format('HH:mm:ss')}Z`, recurrence:{type:"2", weekly_days: value?.weekly_days.toString(),end_date_time: `${moment(value.end_date_time).format('yyyy-MM-DD')}T${moment(value.end_date_time).format('HH:mm:ss')}Z` }, weekly_days:undefined, end_date_time:undefined} }));
 
           }}
           schema={CreateMeetingSchema}

@@ -1,5 +1,7 @@
 import { Field, Formik } from 'formik'
-import { Form } from 'react-bootstrap'
+import { Form, Toast } from 'react-bootstrap'
+import { useDispatch, useSelector } from 'react-redux'
+import { RootStateReducer } from '../../store'
 import CustomButton from '../UIComponents/CustomButton'
 import CustomCheckbox from './Inputs/CustomCheckbox'
 import CustomInput from './Inputs/CustomInput'
@@ -10,7 +12,7 @@ interface TableFieldInterface {
     readonly comonent: string;
     readonly width: number;
     readonly placeholder: string;
-    readonly options?: Array<{label:string,value:string|number}>    ;
+    readonly options?: Array<{ label: string, value: string | number }>;
 }
 interface HandleFormsInterface {
     readonly fields: Array<TableFieldInterface>;
@@ -19,6 +21,8 @@ interface HandleFormsInterface {
     readonly initialValue: object;
 }
 export default function HandleForms({ fields, handleSubmitForm, schema, initialValue }: HandleFormsInterface) {
+    const { ErrorSlice: { errorMessage } } = useSelector((state: RootStateReducer) => state);
+    const dispatch = useDispatch()
     return (
         <Formik
             enableReinitialize={true}
@@ -57,6 +61,17 @@ export default function HandleForms({ fields, handleSubmitForm, schema, initialV
                                     />
                             }
                             )}
+                            {
+                                errorMessage !== "" &&
+                            <Toast>
+                                <Toast.Header onClick={()=>dispatch({ type:"clearError"})}>
+                                    <img src="holder.js/20x20?text=%20" className="rounded me-2" alt="" />
+                                    <strong className="me-auto">Validation Error</strong>
+                                    <small >11 mins ago</small>
+                                </Toast.Header>
+                                <Toast.Body>{errorMessage}</Toast.Body>
+                            </Toast>
+                            }
                             <CustomButton title="Submit" onClick={handleSubmit} />
                         </Form>
                     </>

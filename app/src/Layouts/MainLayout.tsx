@@ -14,12 +14,12 @@ export default function MainLayout(props: Props) {
 
     const { user: { isLogin } } = useSelector((state: RootStateReducer) => state);
     const protectedPath = ['form', "",]
-    // useEffect(() => {
-    //     const currentPathIs = location.pathname.split('/');
-    //     if (!(isLogin) && protectedPath.includes(currentPathIs[1])) {
-    //         navigate('/login');
-    //     }
-    // }, [isLogin]);
+    useEffect(() => {
+        const currentPathIs = location.pathname.split('/');
+        if (!(isLogin) && protectedPath.includes(currentPathIs[1])) {
+            navigate('/login');
+        }
+    }, [isLogin]);
     return (
         <>
             <TopNav />

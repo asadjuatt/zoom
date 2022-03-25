@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { useState, useEffect } from "react";
 import { loginInterface } from "../utils/interfaces/interfaces";
 import { RootStateReducer } from "../store";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import HandleForms from "../Components/Forms/HandleForms";
 import { LoginSchema } from "../Components/Validations/Formik/FormikSchema";
 export default function Login() {
@@ -45,6 +45,9 @@ export default function Login() {
       schema={LoginSchema}
       initialValue={formData}
     />
+    <Link to={"/register"}>
+    <Button variant="text">Register</Button>
+    </Link>
   </div>
   )
 }

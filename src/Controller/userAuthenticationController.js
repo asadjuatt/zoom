@@ -6,32 +6,35 @@ const { validationResult } = require('express-validator');
 
 // 
 var multer = require('multer');
- 
+const ErrorResponse = require('../util/errorResponse');
+
 var storage = multer.diskStorage({
     destination: (req, file, cb) => {
-        cb(null,__dirname +'../../../../public/uploads/images')
+        cb(null, __dirname + '../../../../public/uploads/images')
     },
     filename: (req, file, cb) => {
-        cb(null,  'profile-' + Date.now()+'-' + file.originalname)
+        cb(null, 'profile-' + Date.now() + '-' + file.originalname)
     }
 });
- 
+
 var upload = multer({ storage: storage });
 
-// 
+//
 
 const login = async (req, res, next) => {
-console.log("login called");
+    var errors = validationResult(req).array();
+    if (errors.length > 0) {
+        res.status(422).send(errors)
+    }
     const { email, password } = req.body;
-    console.log("email and password is", email, password);
     if (email && password) {
         const user = await User.findOne({ email })
         if (!user) {
-            res.status(422).send("user does not exist")
+            res.status(422).send({message: "Email dose't exist"})
         } else {
             const isPasswordMatch = await bcrypt.compare(password, user.password)
             if (!isPasswordMatch) {
-                res.status(422).send("incorrect password")
+                res.status(422).send({message: "Password dose't match"})
             } else if (
                 user.disabled
             ) {
@@ -68,7 +71,7 @@ const register = async (req, res, next) => {
 
         }).catch(error => {
             if (error.code == 11000) {
-                res.status(422).send("email already exist")
+                res.status(422).send({message: "email already exist"})
             } else {
                 console.log(error)
                 res.status(400).send(error)
@@ -94,7 +97,7 @@ const logout = (req, res, next) => {
     })
 }
 const authenticate = (req, res, next) => {
-    User.findById(req.user._id, { full_Name: 1, email: 1, phone_Number: 1, street: 1, city: 1, state: 1, state: 1,profile_image:1, country: 1, zip: 1, })
+    User.findById(req.user._id, { full_Name: 1, email: 1, phone_Number: 1, street: 1, city: 1, state: 1, state: 1, profile_image: 1, country: 1, zip: 1, })
         .then(data => {
             res.send({ user: data })
         }).catch(err => {
@@ -160,7 +163,7 @@ const profile = async (req, res, next) => {
         state,
         country,
         zip,
-        profile_image:req.file.filename
+        profile_image: req.file.filename
     },
         function (err, docs) {
             if (err) {
@@ -174,4 +177,4 @@ const profile = async (req, res, next) => {
         });
 
 }
-module.exports = { login, register, forgot, reset, logout, authenticate, verifyOTP, profile,upload }
+module.exports = { login, register, forgot, reset, logout, authenticate, verifyOTP, profile, upload }

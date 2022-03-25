@@ -25,6 +25,7 @@ const ErrorSlice = (state = initialState, action: any) => {
             console.log("caled vry happy")
             return { ...state, ...action.payload };
         case "clearError":
+            console.log("called clear error")
             return { ...initialState };
         default:
             // If this reducer doesn't recognize the action type, or doesn't

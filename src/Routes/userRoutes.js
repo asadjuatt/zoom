@@ -16,9 +16,15 @@ const registerValidation = [
     check('password', 'Password is requried')
         .isLength({ min: 8 }),
 ]; 
+const loginValidation = [
+    check('email', 'Email is required')
+        .isEmail(),
+    check('password', 'Password is requried')
+        .isLength({ min: 8 }),
+]; 
 
 route.post('/register', registerValidation, register)
-route.post('/login', login)
+route.post('/login',loginValidation, login)
 route.get('/authenticate', auth, authenticate)
 route.post('/forgot', forgot)
 route.put('/reset', reset)
@@ -29,9 +35,5 @@ route.post('/verifyOTP', verifyOTP)
 route.post('/meeting', createMeeting);
 route.get('/meeting', getMeeting);
 route.delete('/meeting/:id', deleteMeeting);
-
-
-
-
 
 module.exports = route

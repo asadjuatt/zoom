@@ -31,12 +31,13 @@ const createMeeting = async (req, res) => {
 
   rp(options)
     .then(function (response) {
-      // console.log("response is: ", response);
+      console.log("response is: ", response);
       // response.status(200).json(response);
-      let dataRes = {
-        join_url: response.join_url,
-      };
-      res.status(200).json(dataRes);
+      // let dataRes = {
+      //   join_url: response.join_url,
+      // };
+      // if(response.occurrences)
+      res.status(200).json(response);
 
       // res.send("create meeting result: " + JSON.stringify(response));
     })

@@ -4,10 +4,10 @@ export const detectError = (error: any, dispatch: (props: any) => {}, rejectWith
     console.log("error :>>>", error)
     if (error?.response) {
         console.log("error.response", error.response)
-        // dispatch(setError({
-        //     errorCode: error.response.status,
-        //     errorMessage: error.response.data.error,
-        //     errorFields: Object.keys(error.response.data)}))
+        dispatch(setError({
+            errorCode: error.response.status,
+            errorMessage: error.response.data.message,
+            errorFields: Object.keys(error.response.data)}))
 
     }else if(error?.request){
         console.log("error.request", error.request)

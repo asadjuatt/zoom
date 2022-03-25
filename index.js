@@ -4,6 +4,8 @@ var cors = require('cors')
 require("dotenv").config();
 // import routes
 const userRoutes =require('./src/Routes/userRoutes')
+// import midleware
+const {logErrors, errorHandler, clientErrorHandler} = require('./src/middleware/errors');
 
 
 // import database models
@@ -40,7 +42,7 @@ mongoose
 
 // app.use("/admin", AdminRoutes)
 app.use("/api", userRoutes)
-
+app.use(logErrors, clientErrorHandler, errorHandler);
 
 
 app.use((req,res,error)=>{
