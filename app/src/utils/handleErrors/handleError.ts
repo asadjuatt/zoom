@@ -5,9 +5,9 @@ export const detectError = (error: any, dispatch: (props: any) => {}, rejectWith
     if (error?.response) {
         // console.log("error.response", error.response)
         dispatch(setError({
-            errorCode: error.response.status,
-            errorMessage: error.response.data.message,
-            errorFields: Object.keys(error.response.data)}))
+            errorCode: error?.response?.status,
+            errorMessage: error?.response?.data?.message,
+            errorFields: Object.keys(error?.response?.data)}))
 
     }else if(error?.request){
         // console.log("error.request", error.request)

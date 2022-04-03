@@ -38,8 +38,6 @@ mongoose
   })
   .catch(err => console.log("err in catch connect",err));
 // routes....................................................................
-
-
 // app.use("/admin", AdminRoutes)
 app.use("/api", userRoutes)
 app.use(logErrors, clientErrorHandler, errorHandler);
